@@ -149,7 +149,7 @@ export class JiraModule {
                         },
                     },
                 ],
-                labels: [this.faker.helpers.arrayElements(["Team A", "Team B", "Team C", "Team D"])],
+                labels: this.faker.helpers.arrayElements(["Team A", "Team B", "Team C", "Team D"]),
                 lastViewed: null,
                 priority: {
                     self: this.faker.internet.url(),
