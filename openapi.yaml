@@ -1,0 +1,766 @@
+openapi: 3.0.0
+info:
+    title: My Express App
+    version: 1.0.0
+    description: An Express app that provides a search route with a delay and a route to get issue details.
+servers:
+    - url: http://localhost:6000
+paths:
+    /:
+        get:
+            summary: Get info about the server
+            responses:
+                "200":
+                    description: A JSON object with a message and available routes
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                    availableRoutes:
+                                        type: array
+                                        items:
+                                            type: string
+    /search:
+        get:
+            summary: Get search results
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                delay:
+                                    type: integer
+                                    description: Response delay in milliseconds
+            responses:
+                "200":
+                    description: A JSON object with search results
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    expand:
+                                        type: string
+                                    startAt:
+                                        type: integer
+                                    maxResults:
+                                        type: integer
+                                    total:
+                                        type: integer
+                                    issues:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                expand:
+                                                    type: string
+                                                id:
+                                                    type: string
+                                                self:
+                                                    type: string
+                                                key:
+                                                    type: string
+                                                fields:
+                                                    type: object
+                                                    properties:
+                                                        summary:
+                                                            type: string
+    /issue/ABC-13823:
+        get:
+            summary: Get issue details
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                delay:
+                                    type: integer
+                                    description: Response delay in milliseconds
+            responses:
+                "200":
+                    description: A JSON object with issue details
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    expand:
+                                        type: string
+                                    id:
+                                        type: string
+                                    self:
+                                        type: string
+                                    key:
+                                        type: string
+                                    fields:
+                                        type: object
+                                        properties:
+                                            issuetype:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    description:
+                                                        type: string
+                                                    iconUrl:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    subtask:
+                                                        type: boolean
+                                            timespent:
+                                                type: integer
+                                            project:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    key:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    projectTypeKey:
+                                                        type: string
+                                                    avatarUrls:
+                                                        type: object
+                                                        properties:
+                                                            "48x48":
+                                                                type: string
+                                                            "24x24":
+                                                                type: string
+                                                            "16x16":
+                                                                type: string
+                                                            "32x32":
+                                                                type: string
+                                            fixVersions:
+                                                type: array
+                                                items:
+                                                    type: object
+                                                    properties:
+                                                        self:
+                                                            type: string
+                                                        id:
+                                                            type: string
+                                                        description:
+                                                            type: string
+                                                        name:
+                                                            type: string
+                                                        archived:
+                                                            type: boolean
+                                                        released:
+                                                            type: boolean
+                                                        releaseDate:
+                                                            type: string
+                                            customfield_11200:
+                                                type: string
+                                            aggregatetimespent:
+                                                type: integer
+                                            resolution:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    description:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                            customfield_10310:
+                                                type: string
+                                            customfield_10500:
+                                                type: string
+                                            customfield_12404:
+                                                type: string
+                                            customfield_12403:
+                                                type: string
+                                            customfield_10701:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    value:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    disabled:
+                                                        type: boolean
+                                            customfield_10900:
+                                                type: string
+                                            resolutiondate:
+                                                type: string
+                                            workratio:
+                                                type: integer
+                                            lastViewed:
+                                                type: string
+                                            watches:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    watchCount:
+                                                        type: integer
+                                                    isWatching:
+                                                        type: boolean
+                                            created:
+                                                type: string
+                                            customfield_12000:
+                                                type: string
+                                            priority:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    iconUrl:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                            customfield_12400:
+                                                type: string
+                                            customfield_12402:
+                                                type: string
+                                            customfield_12600:
+                                                type: string
+                                            labels:
+                                                type: array
+                                                items:
+                                                    type: string
+                                            customfield_12401:
+                                                type: string
+                                            customfield_11501:
+                                                type: string
+                                            timeestimate:
+                                                type: integer
+                                            aggregatetimeoriginalestimate:
+                                                type: integer
+                                            versions:
+                                                type: array
+                                                items:
+                                                    type: string
+                                            issuelinks:
+                                                type: array
+                                                items:
+                                                    type: object
+                                                    properties:
+                                                        id:
+                                                            type: string
+                                                        self:
+                                                            type: string
+                                                        type:
+                                                            type: object
+                                                            properties:
+                                                                id:
+                                                                    type: string
+                                                                name:
+                                                                    type: string
+                                                                inward:
+                                                                    type: string
+                                                                outward:
+                                                                    type: string
+                                                                self:
+                                                                    type: string
+                                                        inwardIssue:
+                                                            type: object
+                                                            properties:
+                                                                id:
+                                                                    type: string
+                                                                key:
+                                                                    type: string
+                                                                self:
+                                                                    type: string
+                                                                fields:
+                                                                    type: object
+                                                                    properties:
+                                                                        summary:
+                                                                            type: string
+                                                                        status:
+                                                                            type: object
+                                                                            properties:
+                                                                                self:
+                                                                                    type: string
+                                                                                description:
+                                                                                    type: string
+                                                                                iconUrl:
+                                                                                    type: string
+                                                                                name:
+                                                                                    type: string
+                                                                                id:
+                                                                                    type: string
+                                                                                statusCategory:
+                                                                                    type: object
+                                                                                    properties:
+                                                                                        self:
+                                                                                            type: string
+                                                                                        id:
+                                                                                            type: string
+                                                                                        key:
+                                                                                            type: string
+                                                                                        colorName:
+                                                                                            type: string
+                                                                                        name:
+                                                                                            type: string
+                                                                        priority:
+                                                                            type: object
+                                                                            properties:
+                                                                                self:
+                                                                                    type: string
+                                                                                iconUrl:
+                                                                                    type: string
+                                                                                name:
+                                                                                    type: string
+                                                                                id:
+                                                                                    type: string
+                                                                        issuetype:
+                                                                            type: object
+                                                                            properties:
+                                                                                self:
+                                                                                    type: string
+                                                                                id:
+                                                                                    type: string
+                                                                                description:
+                                                                                    type: string
+                                                                                iconUrl:
+                                                                                    type: string
+                                                                                name:
+                                                                                    type: string
+                                                                                subtask:
+                                                                                    type: boolean
+                                                                                avatarId:
+                                                                                    type: string
+                                            assignee:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    key:
+                                                        type: string
+                                                    emailAddress:
+                                                        type: string
+                                                    avatarUrls:
+                                                        type: object
+                                                        properties:
+                                                            "48x48":
+                                                                type: string
+                                                            "24x24":
+                                                                type: string
+                                                            "16x16":
+                                                                type: string
+                                                            "32x32":
+                                                                type: string
+                                                    displayName:
+                                                        type: string
+                                                    active:
+                                                        type: boolean
+                                                    timeZone:
+                                                        type: string
+                                            updated:
+                                                type: string
+                                            status:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    description:
+                                                        type: string
+                                                    iconUrl:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    statusCategory:
+                                                        type: object
+                                                        properties:
+                                                            self:
+                                                                type: string
+                                                            id:
+                                                                type: string
+                                                            key:
+                                                                type: string
+                                                            colorName:
+                                                                type: string
+                                                            name:
+                                                                type: string
+                                            components:
+                                                type: array
+                                                items:
+                                                    type: string
+                                            timeoriginalestimate:
+                                                type: integer
+                                            description:
+                                                type: string
+                                            customfield_13200:
+                                                type: string
+                                            customfield_11500:
+                                                type: string
+                                            timetracking:
+                                                type: object
+                                                properties:
+                                                    originalEstimate:
+                                                        type: string
+                                                    remainingEstimate:
+                                                        type: string
+                                                    timeSpent:
+                                                        type: string
+                                                    originalEstimateSeconds:
+                                                        type: integer
+                                                    remainingEstimateSeconds:
+                                                        type: integer
+                                                    timeSpentSeconds:
+                                                        type: integer
+    /issue/random:
+        get:
+            summary: Get a random fake issue
+            responses:
+                "200":
+                    description: A JSON object with random issue details
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    expand:
+                                        type: string
+                                    id:
+                                        type: string
+                                    self:
+                                        type: string
+                                    key:
+                                        type: string
+                                    fields:
+                                        type: object
+                                        properties:
+                                            issuetype:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    description:
+                                                        type: string
+                                                    iconUrl:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    subtask:
+                                                        type: boolean
+                                            timespent:
+                                                type: integer
+                                            project:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    key:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    projectTypeKey:
+                                                        type: string
+                                                    avatarUrls:
+                                                        type: object
+                                                        properties:
+                                                            "48x48":
+                                                                type: string
+                                                            "24x24":
+                                                                type: string
+                                                            "16x16":
+                                                                type: string
+                                                            "32x32":
+                                                                type: string
+                                            fixVersions:
+                                                type: array
+                                                items:
+                                                    type: object
+                                                    properties:
+                                                        self:
+                                                            type: string
+                                                        id:
+                                                            type: string
+                                                        description:
+                                                            type: string
+                                                        name:
+                                                            type: string
+                                                        archived:
+                                                            type: boolean
+                                                        released:
+                                                            type: boolean
+                                                        releaseDate:
+                                                            type: string
+                                            customfield_11200:
+                                                type: string
+                                            aggregatetimespent:
+                                                type: integer
+                                            resolution:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    description:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                            customfield_10310:
+                                                type: string
+                                            customfield_10500:
+                                                type: string
+                                            customfield_12404:
+                                                type: string
+                                            customfield_12403:
+                                                type: string
+                                            customfield_10701:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    value:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    disabled:
+                                                        type: boolean
+                                            customfield_10900:
+                                                type: string
+                                            resolutiondate:
+                                                type: string
+                                            workratio:
+                                                type: integer
+                                            lastViewed:
+                                                type: string
+                                            watches:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    watchCount:
+                                                        type: integer
+                                                    isWatching:
+                                                        type: boolean
+                                            created:
+                                                type: string
+                                            customfield_12000:
+                                                type: string
+                                            priority:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    iconUrl:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                            customfield_12400:
+                                                type: string
+                                            customfield_12402:
+                                                type: string
+                                            customfield_12600:
+                                                type: string
+                                            labels:
+                                                type: array
+                                                items:
+                                                    type: string
+                                            customfield_12401:
+                                                type: string
+                                            customfield_11501:
+                                                type: string
+                                            timeestimate:
+                                                type: integer
+                                            aggregatetimeoriginalestimate:
+                                                type: integer
+                                            versions:
+                                                type: array
+                                                items:
+                                                    type: string
+                                            issuelinks:
+                                                type: array
+                                                items:
+                                                    type: object
+                                                    properties:
+                                                        id:
+                                                            type: string
+                                                        self:
+                                                            type: string
+                                                        type:
+                                                            type: object
+                                                            properties:
+                                                                id:
+                                                                    type: string
+                                                                name:
+                                                                    type: string
+                                                                inward:
+                                                                    type: string
+                                                                outward:
+                                                                    type: string
+                                                                self:
+                                                                    type: string
+                                                        inwardIssue:
+                                                            type: object
+                                                            properties:
+                                                                id:
+                                                                    type: string
+                                                                key:
+                                                                    type: string
+                                                                self:
+                                                                    type: string
+                                                                fields:
+                                                                    type: object
+                                                                    properties:
+                                                                        summary:
+                                                                            type: string
+                                                                        status:
+                                                                            type: object
+                                                                            properties:
+                                                                                self:
+                                                                                    type: string
+                                                                                description:
+                                                                                    type: string
+                                                                                iconUrl:
+                                                                                    type: string
+                                                                                name:
+                                                                                    type: string
+                                                                                id:
+                                                                                    type: string
+                                                                                statusCategory:
+                                                                                    type: object
+                                                                                    properties:
+                                                                                        self:
+                                                                                            type: string
+                                                                                        id:
+                                                                                            type: string
+                                                                                        key:
+                                                                                            type: string
+                                                                                        colorName:
+                                                                                            type: string
+                                                                                        name:
+                                                                                            type: string
+                                                                        priority:
+                                                                            type: object
+                                                                            properties:
+                                                                                self:
+                                                                                    type: string
+                                                                                iconUrl:
+                                                                                    type: string
+                                                                                name:
+                                                                                    type: string
+                                                                                id:
+                                                                                    type: string
+                                                                        issuetype:
+                                                                            type: object
+                                                                            properties:
+                                                                                self:
+                                                                                    type: string
+                                                                                id:
+                                                                                    type: string
+                                                                                description:
+                                                                                    type: string
+                                                                                iconUrl:
+                                                                                    type: string
+                                                                                name:
+                                                                                    type: string
+                                                                                subtask:
+                                                                                    type: boolean
+                                                                                avatarId:
+                                                                                    type: string
+                                            assignee:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    key:
+                                                        type: string
+                                                    emailAddress:
+                                                        type: string
+                                                    avatarUrls:
+                                                        type: object
+                                                        properties:
+                                                            "48x48":
+                                                                type: string
+                                                            "24x24":
+                                                                type: string
+                                                            "16x16":
+                                                                type: string
+                                                            "32x32":
+                                                                type: string
+                                                    displayName:
+                                                        type: string
+                                                    active:
+                                                        type: boolean
+                                                    timeZone:
+                                                        type: string
+                                            updated:
+                                                type: string
+                                            status:
+                                                type: object
+                                                properties:
+                                                    self:
+                                                        type: string
+                                                    description:
+                                                        type: string
+                                                    iconUrl:
+                                                        type: string
+                                                    name:
+                                                        type: string
+                                                    id:
+                                                        type: string
+                                                    statusCategory:
+                                                        type: object
+                                                        properties:
+                                                            self:
+                                                                type: string
+                                                            id:
+                                                                type: string
+                                                            key:
+                                                                type: string
+                                                            colorName:
+                                                                type: string
+                                                            name:
+                                                                type: string
+                                            components:
+                                                type: array
+                                                items:
+                                                    type: string
+                                            timeoriginalestimate:
+                                                type: integer
+                                            description:
+                                                type: string
+                                            customfield_13200:
+                                                type: string
+                                            customfield_11500:
+                                                type: string
+                                            timetracking:
+                                                type: object
+                                                properties:
+                                                    originalEstimate:
+                                                        type: string
+                                                    remainingEstimate:
+                                                        type: string
+                                                    timeSpent:
+                                                        type: string
+                                                    originalEstimateSeconds:
+                                                        type: integer
+                                                    remainingEstimateSeconds:
+                                                        type: integer
+                                                    timeSpentSeconds:
+                                                        type: integer
