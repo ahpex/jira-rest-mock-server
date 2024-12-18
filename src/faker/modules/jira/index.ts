@@ -66,7 +66,7 @@ export class JiraModule {
 
         return {
             expand: "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-            id: this.faker.datatype.uuid(),
+            id: this.faker.datatype.number({ min: 10000, max: 99999 }).toString(),
             self: this.faker.internet.url(),
             key: key || this.key(),
             fields: {
