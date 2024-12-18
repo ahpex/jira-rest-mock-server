@@ -2,6 +2,8 @@
 
 This is a simple Express application that provides a "search" route. The application reads data from a JSON file and allows for a configurable response delay.
 
+This mock server tries to mimic the routes and responses of [Jira 9.4.5](https://docs.atlassian.com/software/jira/docs/api/REST/9.4.5/)
+
 ## Project Structure
 
 ```none
@@ -22,18 +24,19 @@ my-express-app
 
 1. Clone the repository:
 
-    ```
+    ```bash
     git clone <repository-url>
     ```
 
 2. Navigate to the project directory:
 
-    ```
+    ```bash
     cd my-express-app
     ```
 
 3. Install the dependencies:
-    ```
+
+    ```bash
     npm install
     ```
 
@@ -41,11 +44,13 @@ my-express-app
 
 To start the application, run:
 
-```
+```bash
 npm start
 ```
 
-The application will be available at `http://localhost:6000`.
+The application will be available at [https://127.0.0.1:6443](https://127.0.0.1:6443).
+
+Start getting a fake issue using [https://127.0.0.1:6443/rest/api/v2/issue/SAMPLE-12345](https://127.0.0.1:6443/rest/api/v2/issue/SAMPLE-12345)
 
 ## API Endpoint
 

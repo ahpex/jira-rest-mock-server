@@ -25,10 +25,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use("/", info);
 app.use("/browse", browseRoute);
-app.use("/search", searchRoute);
-app.use("/issue", issueRoute);
+app.use("/rest/api/v2/search", searchRoute);
+app.use("/rest/api/v2/issue", issueRoute);
 
 // Start HTTPS server
 https.createServer(sslOptions, app).listen(SSL_PORT, () => {
-    console.log(`HTTPS server is running on https://localhost:${SSL_PORT}`);
+    console.log(`HTTPS server is running on https://127.0.0.1:${SSL_PORT}`);
 });
