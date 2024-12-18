@@ -1,4 +1,4 @@
-import { MyFaker } from "../../faker";
+import type { JiraFaker } from "../..";
 import issue_summary from "./issue_summary";
 
 export type Issue = {
@@ -50,7 +50,7 @@ type SearchResultIssue = {
 };
 
 export class JiraModule {
-    constructor(protected readonly faker: MyFaker) {}
+    constructor(protected readonly faker: JiraFaker) {}
 
     issue(
         options: {

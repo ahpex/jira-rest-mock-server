@@ -1,8 +1,7 @@
 import express from "express";
-import { MyFaker } from "../faker/faker";
+import { faker } from "../faker";
 
 const router = express.Router();
-const faker = new MyFaker();
 
 router.get("/:key", (req: express.Request, res: express.Response) => {
     const key = req.params.key;
