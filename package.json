@@ -2,11 +2,11 @@
   "name": "jira-rest-mock-server",
   "version": "0.0.1",
   "description": "An Express app that provides a search route with a delay.",
-  "main": "src/app.ts",
+  "main": "src/server/app.ts",
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "ts-node src/server/app.ts",
     "build": "tsc",
-    "nodemon": "nodemon src/app.ts"
+    "nodemon": "nodemon src/server/app.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",

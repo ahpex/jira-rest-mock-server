@@ -12,8 +12,8 @@ const SSL_PORT = process.env.SSL_PORT || 6443;
 
 // SSL certificate and key
 const sslOptions = {
-    key: fs.readFileSync("./ssl/private.key"),
-    cert: fs.readFileSync("./ssl/certificate.crt"),
+    key: fs.readFileSync(__dirname + "/ssl/private.key"),
+    cert: fs.readFileSync(__dirname + "/ssl/certificate.crt"),
 };
 
 // Logging middleware

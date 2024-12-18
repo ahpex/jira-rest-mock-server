@@ -1,7 +1,7 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-import { faker } from "../faker";
+import { faker } from "../../faker";
 
 const router = express.Router();
 
