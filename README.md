@@ -1,20 +1,29 @@
 # Jira-Rest-Mock-Server
 
-This is a simple Express application that provides a "search" route. The application reads data from a JSON file and allows for a configurable response delay.
+This is a simple JIRA REST mock server intended to be used as a fake server for testing your own tools or automation scripts.
+
+Some examples are:
+
+- Test automation scripts without stressing the real Jira server
+- Test scripts reading/writing data to the server
+- You don't want to have real names or real issues just for testing
+- No need for authorization with a Bearer Token
+- Fast because it's minimal
+
+Intentionally it **does not** implement the full REST API, but only a subset. It shall be lightweight and not bloated with features. Nevertheless, it shall be possible to extend it to your needs with the examples provided.
 
 This mock server tries to mimic the routes and responses of [Jira 9.4.5](https://docs.atlassian.com/software/jira/docs/api/REST/9.4.5/)
 
 ## Project Structure
 
 ```none
-my-express-app
+jira-rest-mock-server
 ├── src
-│   ├── app.ts            # Entry point of the application
-│   ├── routes
-│   │   └── search.ts     # Defines the "search" route
-│   └── responses
-│       └── search
-│           └── search.json # JSON data for the search response
+    ├── faker             # extensions to faker-js to fake responsed
+    └── server            # express app
+       ├── ssl            # SSL configuration
+       ├── app.ts         # Entry point of the application
+       └── routes         # routes
 ├── package.json          # npm configuration file
 ├── tsconfig.json         # TypeScript configuration file
 └── README.md             # Project documentation
@@ -22,23 +31,13 @@ my-express-app
 
 ## Installation
 
-1. Clone the repository:
+Run `npm install` first.
 
-    ```bash
-    git clone <repository-url>
-    ```
+### Set up SSL
 
-2. Navigate to the project directory:
+Folder `src/server/ssl` contains a default (self-signed) certificate, to enable SSL encryption. Running `npm start` will use these defaults. 
 
-    ```bash
-    cd my-express-app
-    ```
-
-3. Install the dependencies:
-
-    ```bash
-    npm install
-    ```
+If you want to use your own certificate and keys, please overwrite these files.
 
 ## Usage
 
@@ -52,36 +51,35 @@ The application will be available at [https://127.0.0.1:6443](https://127.0.0.1:
 
 Start getting a fake issue using [https://127.0.0.1:6443/rest/api/v2/issue/SAMPLE-12345](https://127.0.0.1:6443/rest/api/v2/issue/SAMPLE-12345)
 
-## API Endpoint
+## API Endpoints
 
-### GET /search
+### GET /
 
-This endpoint returns the content of `search.json`. You can set a response delay using the `delay` body parameter (in milliseconds).
+Root paths just gives some metadata.
 
-**Example:**
+### GET /browse
 
-```
-http://localhost:3000/search
-{
-   "delay": 1000,
-}
-```
+This route is a simple non-REST route to be able to click on one of the responses as it would be possible with the original server.
 
-This will delay the response by 1000 milliseconds.
+### GET /rest/api/v2/search
 
-### GET /issue
+Search route.
 
--   `/issue` returns the contents of the file issue.json
--   `/random` returns a faked issue id
--   `/ABC-:key` returns a faked issue with the specific id
+Returns 20 fake search results, not matter what you pass.
 
-## Routes
+### GET /rest/api/v2/issue/:key
 
-Routes are described in OpenAPI v3 file (./openapi.yaml)
+Returns an issue every time you call this route.
 
-## Nodemon
+Example: [https://127.0.0.1:6443/rest/api/v2/issue/SAMPLE-12345](https://127.0.0.1:6443/rest/api/v2/issue/SAMPLE-12345)
 
-In order to restart the server on every file changed, use nodemon.
+It does not matter what key is provided. It is taken as given.
+
+## Development
+
+### Nodemon
+
+In order to restart the server on every file changed whilst development, use nodemon.
 
 Usage:
 
